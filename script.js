@@ -4,7 +4,7 @@ function getRandomPlayers() {
 
   $.ajax({
 
-    url: "https://www.boolean.careers/api/array/basket?n=1",
+    url: "https://www.boolean.careers/api/array/basket?n=10",
     metodo: "GET",
     success: function(data, state) {
 
