@@ -1,69 +1,77 @@
 function getRandomPlayers() {
 
-  var players;
+  var players = [];
+  var ask = prompt("Quanti giocatori vuoi generare?");
+  ask = Number(ask);
 
-  $.ajax({
+  for (var i = 0; i < ask; i++) {
 
-    url: "https://www.boolean.careers/api/array/basket?n=10",
-    metodo: "GET",
-    success: function(data, state) {
+    $.ajax({
 
-      if (data.success) {
+      url: "https://www.boolean.careers/api/array/basket?n=1",
+      metodo: "GET",
+      success: function(data, state) {
 
-        players = data.response;
-        updateImput(players);
+        if (data.success) {
 
-        var input = $("#usr-input");
-        var button = $("#clear-btn");
+          players.push(data.response);
 
-        input.change(function() {
-          playerSelector(players)
-        });
-        $(document).on("click", ".sidebar > p", function() {
+          if (players.length == ask) {
 
-          var me = $(this);
-          var selId = me.text();
+            updateImput(players);
 
-          for (var i = 0; i < players.length; i++) {
+            var input = $("#usr-input");
+            var button = $("#clear-btn");
 
-            var player;
+            input.change(function() {
+              playerSelector(players)
+            });
+            $(document).on("click", ".sidebar > p", function() {
 
-            if (selId == players[i].playerCode) {
-              player = players[i]
-            }
+              var me = $(this);
+              var selId = me.text();
+
+              for (var i = 0; i < players.length; i++) {
+
+                var player;
+
+                if (selId == players[i][0].playerCode) {
+                  player = players[i][0]
+                }
+              }
+
+              var id = $("#id > span.content");
+              var points = $("#points > span.content");
+              var bounce = $("#bounce > span.content");
+              var mistake = $("#mistake > span.content");
+              var twoPerc = $("#twoPerc > span.content");
+              var threePerc = $("#threePerc > span.content");
+
+              id.text(player.playerCode);
+              points.text(player.points);
+              bounce.text(player.rebounds);
+              mistake.text(player.fouls);
+              twoPerc.text(player.twoPoints);
+              threePerc.text(player.threePoints);
+            });
+            button.click(clearButton);
           }
+        }
 
-          var id = $("#id > span.content");
-          var points = $("#points > span.content");
-          var bounce = $("#bounce > span.content");
-          var mistake = $("#mistake > span.content");
-          var twoPerc = $("#twoPerc > span.content");
-          var threePerc = $("#threePerc > span.content");
+      },
+      error: function(request, state, error) {
 
-          id.text(player.playerCode);
-          points.text(player.points);
-          bounce.text(player.rebounds);
-          mistake.text(player.fouls);
-          twoPerc.text(player.twoPoints);
-          threePerc.text(player.threePoints);
-        });
-        button.click(clearButton);
+        alert("L'indirizzo del server è sbagliato");
       }
-
-    },
-    error: function(request, state, error) {
-
-      alert("L'indirizzo del server è sbagliato");
-    }
-  })
-
+    })
+  }
 }
 
 function updateImput(players) {
 
   for (var i = 0; i < players.length; i++) {
 
-    var player = players[i];
+    var player = players[i][0];
     var object = document.createElement("option");
 
     object.value = player.playerCode;
@@ -90,8 +98,8 @@ function playerSelector(players) {
 
     var player;
 
-    if (selId == players[i].playerCode) {
-      player = players[i]
+    if (selId == players[i][0].playerCode) {
+      player = players[i][0]
     }
   }
 
