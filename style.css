@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 30px;
+}
+
+body {
+  background-image: url("http://www.sportavellino.it/wp-content/uploads/sites/47/2017/08/eretum-basket.jpg");
+  background-size: cover;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+}
+
+span.content {
+  color: purple;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+#clear-btn {
+  font-size: 25px;
+  background-color: rgb(73, 199, 179);
+  font-family: 'Oswald', sans-serif;
+  border-radius: 5px;
+  width: 70px;
+}
+
+.margin-horiz-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 50px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar{
+  width: 50%;
+  padding: 100px;
+}
+
+.input-container {
+  padding: 100px;
+}
+
+.input-container > * {
+  margin: 0 .5rem;
+}
+
+.player-wrapper {
+  padding-top: 30px;
+}
+
+.sidebar > p:hover {
+
+  cursor: pointer;
+  color: red;
+}
